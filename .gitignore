@@ -1,0 +1,4 @@
+server/__venv
+server/core/__pycache__/
+server/authentication/__pycache__/
+server/registration/__pycache__/

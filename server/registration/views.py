@@ -18,13 +18,14 @@ logger = logging.getLogger(__name__)
 class UserRegistration(APIView):
      def post(self, request:HttpRequest ,*args, **kwargs):
           request_data = request.data
+          print(request_data)
           
           #extracting request data
           try:
-               username = request_data.username
-               password = request_data.password
-               dob = request_data.dob
-               email = request.email
+               username = request_data.get("username")
+               password = request_data.get("password")
+               dob = request_data.get("dob")
+               email = request_data.get("email")
                
           except Exception as e:
                logger.error(f"EXCEPTION: {e}")
@@ -36,5 +37,16 @@ class UserRegistration(APIView):
                email=email,
                password=password
           )
+          user_created = {
+               "username":username,
+               "email":email,
+               "password":password,
+               "profile":{
+                    
+               }
+               
+          }
+          
+          return Response(status=status.HTTP_201_CREATED)
           
           

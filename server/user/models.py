@@ -1,15 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 '''
-Describes the basic user 
+Describes the basic user profile
 '''
 class UserProfile(models.Model):
      user = models.OneToOneField(to=User, primary_key=True, on_delete=models.CASCADE)
-     username = models.CharField(max_length = 30, unique=True, null=False)
      telephone = models.BigIntegerField(null=False)
      country_code = models.IntegerField(null=False)
      dob = models.DateField()
      created_at = models.DateTimeField(auto_now_add = True)
+     edited_at = models.DateTimeField(auto_now = True)
      
 '''
 Describes the address of the user

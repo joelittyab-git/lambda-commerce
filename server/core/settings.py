@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
+import os
+
+#finding and laoding project environemnt paths
+env_path = find_dotenv()
+load_dotenv(env_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ymwvjiq*9cp#a4*5#sl3jp_-p8%w=@d1$1eh_9qt7-n9$^a%kl'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -94,7 +100,14 @@ SECURITY_ENGINE = [
                         "HOST":"http://ferversocket.io/",
                         "PORT":1221,
                         "DATABASE":"N/A",
-                        "USER":"ADMIN"
+                        "USER":"ADMIN",
+                        "FIREWALL_SWITCH":{
+                            "MIDDLEWARE_SWITCH":{ 'django.middleware.security.SecurityMiddleware'},
+                            "GATEWAY_COUNTER":{
+                                "CMD":"host --pass login:ADMIN/password@123/",
+                                "FALSIFY":True
+                            }
+                        }
                     },
                     "CMD":"host --link load=prefix:/DEBO@2/ --IN /HEV@DELT/  --OUT /FEV:GAM/ insert[socket=rand.oulet()]"
                 }
@@ -103,8 +116,8 @@ SECURITY_ENGINE = [
                 "ALPHA_COUNTER":12221,
                 "OBS":None,
                 "CONFIG":{
-                    {"SECRET_KEY_ENGINE"}:{},
-                    {
+                    "SECRET_KEY_ENGINE":{},
+                    "X-CROSS:AC2":{
                         "GATEWAY":{
                             
                         },
@@ -114,17 +127,17 @@ SECURITY_ENGINE = [
                         "ROUTER":{
                             
                         }
-                    }:{
+                    },"X-CROSS:FW7":{
                         
                     }
                 },
-                "PACKET_RECEIVE":{"/FEV_ALPHA/"},
-                "PACKET_THROUGH":{"/FEV_NULLABLE/"},
-                "PACKET_SEND":{"/FEV_GAM/"},
+                "PACKET_RECEIVE":"/FEV_ALPHA/",
+                "PACKET_THROUGH":"/FEV_NULLABLE/",
+                "PACKET_SEND":"/FEV_GAM/",
             },
             "FEV:GAM":{},
         }
-    }
+    },
 ]
 
 
@@ -134,11 +147,11 @@ SECURITY_ENGINE = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lambda_commerce_120124_priv',
-        'USER':'root',
-        'PASSWORD':'Tiger@123',
-        'HOST':'localhost',
-        'PORT':'3306'
+        'NAME': os.getenv("DATABASE_NAME"),
+        'USER':os.getenv("DATABASE_USER"),
+        'PASSWORD':os.getenv("DATABASE_PASSWORD"),
+        'HOST':os.getenv("DATABASE_HOST"),
+        'PORT':os.getenv("DATABASE_PORT")
     }
 }
 

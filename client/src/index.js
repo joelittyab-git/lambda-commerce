@@ -1,37 +1,54 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './index.css';
-import ProductsPage from './pages/ProductsPage';
-import 'bootstrap/dist/css/bootstrap.css';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import './App.css';
-import NavBar from './components/NavBar';
-import { createTheme, ThemeProvider } from '@mui/material';
-import './components/stylesheets/index.css';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Login from './pages/Login';
+import App from './App';
 
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+import NavBar from './components/NavBar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
-    primary: {
-      main: '#1976d2',
-    },
   },
 });
+
+const lightTheme = createTheme({
+  palette: {
+    mode: "light",
+  },
+});
+
+var theme = null;
+
+function getTheme(){
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return darkTheme;
+  }
+  return lightTheme;
+
+}
+
 
 
 root.render(
   <BrowserRouter>
-
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={getTheme()}>
         <NavBar/>
       </ThemeProvider>
 
-      <div className="h-screen bg-black">
+      <div className="min-h-screen">
         <Routes>
-          <Route path='/products' element={<ProductsPage/>}/>
+          <Route path='/' />
+          <Route path='/login/' element={<Login/>}/>
         </Routes>
       </div>
   </BrowserRouter>

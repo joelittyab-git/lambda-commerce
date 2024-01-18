@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from django.contrib.auth.models import User
 from rest_framework import status
 import logging
+from django.db import IntegrityError
 
 logger = logging.getLogger(__name__)
 
@@ -32,11 +33,18 @@ class UserRegistration(APIView):
                return Response(status=status.HTTP_406_NOT_ACCEPTABLE)   
           
           #user creation
-          User.objects.create_user(
-               username=username,
-               email=email,
-               password=password
-          )
+          try:
+               User.objects.create_user(
+                    username=username,
+                    email=email,
+                    password=password
+               )
+          except IntegrityError as e:
+               return Response({
+                    "status":"Already exists"
+               }, status=status.HTTP_409_CONFLICT)
+               
+               
           user_created = {
                "username":username,
                "email":email,

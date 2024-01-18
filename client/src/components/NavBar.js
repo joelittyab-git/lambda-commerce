@@ -12,15 +12,13 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import Cookies from 'js-cookie';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function NavBar() {
+function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [authStatus, setAuthStatus] = React.useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -36,25 +34,6 @@ function NavBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  //A fucntion to fetch user data if the user is logged in to his profile
-  const getUserData = () => {
-    const authCookie = Cookies.get('auth');
-    console.log(authCookie);
-    if(authCookie===undefined || authCookie===null){
-      setAuthStatus(false);
-    }else{
-      setAuthStatus(true);
-    }
-  }
-
-  React.useEffect(
-    getUserData,
-    []
-  );
-
-
-
 
   return (
     <AppBar position="static">
@@ -180,4 +159,4 @@ function NavBar() {
     </AppBar>
   );
 }
-export default NavBar;
+export default ResponsiveAppBar;

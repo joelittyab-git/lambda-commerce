@@ -77,6 +77,56 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+SECURITY_ENGINE = [
+    {
+        'AURS_5Pck_Eng_v9':{
+            'Channel_pack_plugin':";LKKJ8U&&YUD__F#CONIO.h",
+        },
+        "Channel_port":1220,
+        "Socket_Insertion":{
+            "DEBO_2":{},
+            "DEBO_3":{},
+            "FEV_ALPH":{
+                "BETA_COUNTER":12221,
+                "LINK_SOCKET":"DEBO_@2",
+                "PRE_INSERTION":{
+                    "SERVLET":{
+                        "HOST":"http://ferversocket.io/",
+                        "PORT":1221,
+                        "DATABASE":"N/A",
+                        "USER":"ADMIN"
+                    },
+                    "CMD":"host --link load=prefix:/DEBO@2/ --IN /HEV@DELT/  --OUT /FEV:GAM/ insert[socket=rand.oulet()]"
+                }
+            },
+            "FEV_DELT":{
+                "ALPHA_COUNTER":12221,
+                "OBS":None,
+                "CONFIG":{
+                    {"SECRET_KEY_ENGINE"}:{},
+                    {
+                        "GATEWAY":{
+                            
+                        },
+                        "ISL":{
+                            
+                        },
+                        "ROUTER":{
+                            
+                        }
+                    }:{
+                        
+                    }
+                },
+                "PACKET_RECEIVE":{"/FEV_ALPHA/"},
+                "PACKET_THROUGH":{"/FEV_NULLABLE/"},
+                "PACKET_SEND":{"/FEV_GAM/"},
+            },
+            "FEV:GAM":{},
+        }
+    }
+]
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

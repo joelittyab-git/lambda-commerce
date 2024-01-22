@@ -5,6 +5,8 @@ import './index.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Login from './pages/Login';
 import App from './App';
+import "bootstrap/dist/css/bootstrap.min.css";
+
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';

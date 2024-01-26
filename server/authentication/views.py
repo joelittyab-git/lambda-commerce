@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)    #logging
 -GET-> View for basic user information
 '''
 class PrimaryAuthView(views.APIView):
+     
      def post(self,request:HttpRequest , *args, **kwargs):
           
           request_data = request.data
@@ -37,6 +38,7 @@ class PrimaryAuthView(views.APIView):
           #Authenticating user credentials
           user_auth = authenticate(request=request, password = password, username=username)
           if(user_auth is None):        #wrong credentials
+               logger.error("This user doesnt exist...")
                return Response({
                     "status":"unautharized"
                }, status=status.HTTP_401_UNAUTHORIZED)
